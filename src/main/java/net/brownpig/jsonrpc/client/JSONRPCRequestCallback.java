@@ -30,13 +30,16 @@ public class JSONRPCRequestCallback<T> implements RequestCallback {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void onResponseReceived(Request request, Response response) {
-		// TODO Auto-generated method stub
 		if( response.getStatusCode() == HTTP_OK )
 		{
-			JSONObject jsonObject = JSONParser.parseStrict(response.getText()).isObject();
-			if( jsonObject != null )
-			{
-				callback.onSuccess((T)deserialize(jsonObject.get("result")));
+			try {
+				JSONObject jsonObject = JSONParser.parseStrict(response.getText()).isObject();
+				if( jsonObject != null )
+				{
+					callback.onSuccess((T)deserialize(jsonObject.get("result")));
+				}
+			} catch (IllegalArgumentException e) {
+				callback.onFailure(new JSONRPCEmptyResponseException());
 			}
 		}
 	}
