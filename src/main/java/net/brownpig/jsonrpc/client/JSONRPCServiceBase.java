@@ -76,6 +76,8 @@ public class JSONRPCServiceBase implements ServiceDefTarget {
 		} else if( value instanceof Object[]) {
 			
 			return serializeJSONArray((Object[])value);
+		} else if( value instanceof JSONValue) {
+			return (JSONObject) value;
 		}
 		
 		return null;
