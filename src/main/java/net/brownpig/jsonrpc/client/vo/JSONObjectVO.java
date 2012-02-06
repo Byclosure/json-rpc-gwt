@@ -25,6 +25,10 @@ public class JSONObjectVO {
 	{
 		return getAttribute(name).getValue();
 	}
+	public ArrayList<Attribute> getAttributes()
+	{
+		return attributes;
+	}
 	public void setValue(String name, Object value )
 	{
 		getAttribute(name).setValue(value);
