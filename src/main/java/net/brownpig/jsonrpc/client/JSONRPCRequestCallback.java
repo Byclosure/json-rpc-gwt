@@ -41,12 +41,14 @@ public class JSONRPCRequestCallback<T> implements RequestCallback {
 			} catch (IllegalArgumentException e) {
 				callback.onFailure(new JSONRPCEmptyResponseException());
 			}
+		} else {
+			// Handle all other statusCodes the same way
+			callback.onFailure(new JSONRPCEmptyResponseException());
 		}
 	}
 	@Override
 	public void onError(Request request, Throwable exception) {
 		// TODO Auto-generated method stub
-
 	}
 	private Object deserialize( JSONValue value )
 	{		
